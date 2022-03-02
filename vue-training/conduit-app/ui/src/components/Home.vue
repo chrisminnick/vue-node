@@ -15,7 +15,7 @@
             </ul>
           </div>
 
-          <h1 class="logo-font">Home Content</h1>
+          <GlobalFeed />
         </div>
         <div class="col-md-3">
           <div class="sidebar">
@@ -34,7 +34,12 @@
 </template>
 
 <script>
+import GlobalFeed from './GlobalFeed.vue';
+
 export default {
   name: 'Home',
+  components: {
+    GlobalFeed,
+  },
 };
 </script>
