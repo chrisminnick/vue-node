@@ -15,7 +15,7 @@
 </template>
 <script>
 import ArticlePreview from './ArticlePreview.vue';
-import articles from '../json/articles.json';
+import ApiService from '../common/api.service.js';
 
 export default {
   name: 'ArticleList',
@@ -24,9 +24,22 @@ export default {
   },
   data() {
     return {
-      articles: articles,
       articleFontSize: 1,
+      articles: [],
     };
+  },
+  methods: {
+    async fetchArticles() {
+      console.log('fetching articles');
+      return ApiService.query('articles').catch((error) => {
+        throw new Error(`[RWV] ApiService ${error}`);
+      });
+    },
+  },
+  async mounted() {
+    let results = await this.fetchArticles();
+    this.articles = results.data.articles;
+    console.log(this.articles);
   },
 };
 </script>
