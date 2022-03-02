@@ -14,36 +14,29 @@
               <li class="nav-item">Global Feed</li>
             </ul>
           </div>
-
           <GlobalFeed />
         </div>
         <div class="col-md-3">
           <div class="sidebar">
             <p>Popular Tags</p>
-            <div class="tag-list">
-              <ul class="tag-list">
-                <li class="tag-default tag-pill tag-outline">dragons</li>
-                <li class="tag-default tag-pill tag-outline">sushi</li>
-              </ul>
-            </div>
+            <TagList />
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
-
 <script>
 import GlobalFeed from './GlobalFeed.vue';
-
+import TagList from './TagList.vue';
 export default {
   name: 'Home',
   components: {
     GlobalFeed,
+    TagList,
   },
 };
 </script>
-
 <style scoped>
 .banner {
   background: #5cb85c;

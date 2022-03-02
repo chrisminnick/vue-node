@@ -19,7 +19,7 @@
       Shrink Text
     </button>
     <p v-text="article.description" />
-    <span><a :href="'article.slug'">Read more...</a></span>
+    <span><a :href="articleLink.slug">Read more...</a></span>
   </div>
 </template>
 <script>

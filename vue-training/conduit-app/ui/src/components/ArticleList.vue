@@ -3,8 +3,14 @@
     <div v-if="articles.length === 0" class="article-preview">
       No articles are here ..yet.
     </div>
+    <input
+      class="form-control"
+      v-model.number="searchDetails"
+      placeholder="filter articles"
+    />
+
     <ArticlePreview
-      v-for="(article, index) in articles"
+      v-for="(article, index) in filterIt"
       :article="article"
       :key="article.title + index"
       :style="{ fontSize: articleFontSize + 'em' }"
@@ -26,6 +32,7 @@ export default {
     return {
       articleFontSize: 1,
       articles: [],
+      searchDetails: '',
     };
   },
   methods: {
@@ -36,10 +43,19 @@ export default {
       });
     },
   },
+
   async mounted() {
     let results = await this.fetchArticles();
     this.articles = results.data.articles;
     console.log(this.articles);
+  },
+  computed: {
+    filterIt: function () {
+      var self = this;
+      return this.articles.filter(function (a) {
+        return a.title.indexOf(self.searchDetails) > -1;
+      });
+    },
   },
 };
 </script>

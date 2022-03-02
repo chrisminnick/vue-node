@@ -7,19 +7,24 @@
       :class="{
         'btn-primary': favorited,
         'btn-outline-primary': !favorited,
-      }">
+      }"
+    >
       <i class="ion-heart"></i>
       <span class="counter"> {{ this.favoritesCount }} </span>
     </button>
-    <button style="margin:3px;" v-on:click="$emit('enlarge-text', 0.1)" >Enlarge Text</button>
-    <button style="margin:3px;" v-on:click="$emit('shrink-text', 0.1)">Shrink Text</button>
+    <button style="margin: 3px" v-on:click="$emit('enlarge-text', 0.1)">
+      Enlarge Text
+    </button>
+    <button style="margin: 3px" v-on:click="$emit('shrink-text', 0.1)">
+      Shrink Text
+    </button>
     <p v-text="article.description" />
-    <span><a :href="'article.slug'">Read more...</a></span>
+    <span><a :href="articleLink.slug">Read more...</a></span>
   </div>
 </template>
 <script>
 export default {
-  name: "ArticlePreview",
+  name: 'ArticlePreview',
   props: {
     article: { type: Object, required: true },
   },
@@ -40,7 +45,7 @@ export default {
     toggleFavorite: function () {
       this.favorited = !this.favorited;
       this.favoritesCount++;
-      console.log("favorited = " + this.favorited);
+      console.log('favorited = ' + this.favorited);
     },
   },
 };
