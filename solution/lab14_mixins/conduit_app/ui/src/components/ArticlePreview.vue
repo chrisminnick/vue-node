@@ -12,12 +12,13 @@
       <i class="ion-heart"></i>
       <span class="counter"> {{ this.favoritesCount }} </span>
     </button>
-    <button style="margin: 3px" v-on:click="enlargeText">Enlarge Text</button>
-    <button style="margin: 3px" v-on:click="shrinkText">Shrink Text</button>
-    <p
-      v-text="article.description"
-      :style="{ fontSize: descriptionFontSize + 'em' }"
-    />
+    <button style="margin: 3px" v-on:click="$emit('enlarge-text', 0.1)">
+      Enlarge Text
+    </button>
+    <button style="margin: 3px" v-on:click="$emit('shrink-text', 0.1)">
+      Shrink Text
+    </button>
+    <p v-text="article.description" />
     <span><a :href="articleLink.slug">Read more...</a></span>
   </div>
 </template>
@@ -38,7 +39,6 @@ export default {
     return {
       favorited: false,
       favoritesCount: 0,
-      descriptionFontSize: 1,
     };
   },
   methods: {
@@ -46,14 +46,6 @@ export default {
       this.favorited = !this.favorited;
       this.favoritesCount++;
       console.log('favorited = ' + this.favorited);
-    },
-    shrinkText: function () {
-      this.descriptionFontSize === 1 ? 1 : (this.descriptionFontSize -= 0.1);
-      console.log('shrink is called' + this.descriptionFontSize);
-    },
-    enlargeText: function () {
-      this.descriptionFontSize += 0.1;
-      console.log('enlarge is called' + this.descriptionFontSize);
     },
   },
 };

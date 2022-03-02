@@ -7,19 +7,18 @@
 </template>
 
 <script>
-import Header from './components/Header'
-import Home from './components/Home'
-import Footer from './components/Footer'
+import Header from './components/Header';
+import Home from './components/Home';
+import Footer from './components/Footer';
 
 export default {
   name: 'App',
   components: {
-    Footer,
+    Header,
     Home,
-    Header  
-  }
-}
+    Footer,
+  },
+};
 </script>
 
-<style>
-</style>
+<style></style>

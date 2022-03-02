@@ -22,6 +22,7 @@
 <script>
 import ArticlePreview from './ArticlePreview.vue';
 import ApiService from '../common/api.service.js';
+import filterIt from '../mixins/filter';
 
 export default {
   name: 'ArticleList',
@@ -49,14 +50,7 @@ export default {
     this.articles = results.data.articles;
     console.log(this.articles);
   },
-  computed: {
-    filterIt: function () {
-      var self = this;
-      return this.articles.filter(function (a) {
-        return a.title.indexOf(self.searchDetails) > -1;
-      });
-    },
-  },
+  mixins: [filterIt],
 };
 </script>
 
