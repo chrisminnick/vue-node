@@ -1,12 +1,15 @@
-# Docker base image
-FROM node:16
+# base image
+FROM node:lts-alpine
 
 # set the working directory
-WORKDIR /api
+WORKDIR /app
 
 # install and cache app dependencies
 COPY package.json .
 
 RUN npm install
+
 COPY . .
-CMD npm start
+
+EXPOSE 8080
+CMD ["npm", "run", "serve"]

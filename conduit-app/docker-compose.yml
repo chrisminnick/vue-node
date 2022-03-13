@@ -1,5 +1,4 @@
 version: '3.8'
-
 services:
   mongodb:
     image: mongo:5.0.2
@@ -23,6 +22,16 @@ services:
       - DB_PORT=$MONGODB_DOCKER_PORT
     stdin_open: true
     tty: true
-
+  ui:
+    depends_on:
+      - app
+    build: ./ui
+    env_file: ./.env
+    ports:
+      - $VUE_LOCAL_PORT:$VUE_DOCKER_PORT
+    volumes:
+      - ./ui:/app
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 volumes:
   db:
