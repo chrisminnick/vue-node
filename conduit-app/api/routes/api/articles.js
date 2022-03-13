@@ -1,20 +1,40 @@
 const express = require('express');
 const router = express.Router();
+let { generateUniqueId } = require('../../model/Article');
 
-router.get('/', (req, res) => {
+router.get('/:slug', (req, res) => {
+  let slug = req.params.slug;
+  console.log(slug);
   res.send('http://localhost:3000/articles GET method');
 });
 
 router.post('/', (req, res) => {
+  let slug = generateUniqueId();
+  let title = req.body.title;
+  let description = req.body.description;
+  let body = req.body.body;
+  let tagList = req.body.tagList;
+  let author = req.body.author;
+  console.log(`${slug} ${title}, ${description} ${body} ${tagList} ${author}`);
+  res.location(`http://localhost:3000/articles/${slug}`);
   res.send('http://localhost:3000/articles POST method');
 });
 
-router.put('/', (req, res) => {
+router.put('/:slug', (req, res) => {
+  let slug = req.params.slug;
+  console.log(`slug : ${slug}`);
+  let author = req.body;
+  console.log(`author : ${author}`);
   res.send('http://localhost:3000/articles PUT method');
 });
 
-router.delete('/', (req, res) => {
-  res.send('http://localhost:3000/articles DELETE method');
+router.delete('/:slug', (req, res) => {
+  let test = false;
+  if (test) {
+    res.send({ sucess: 'Record deleted.' });
+  } else {
+    res.status(404).json({ error: 'File not found' });
+  }
 });
 
 module.exports = router;

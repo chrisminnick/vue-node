@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const articles = require('./routes/api/articles.js');
+app.use(express.json());
 app.use('/articles', articles);
 
 app.get('/', (req, res) => {
