@@ -1,6 +1,11 @@
 const express = require('express');
 const router = express.Router();
-let { generateUniqueId, data, DataUtility } = require('../../model/Article');
+let {
+  generateUniqueId,
+  data,
+  DataUtility,
+  Article,
+} = require('../../model/Article');
 
 router.get('/', (req, res) => {
   let utility = new DataUtility();
@@ -27,9 +32,11 @@ router.post('/', (req, res) => {
   let body = req.body.body;
   let tagList = req.body.tagList;
   let author = req.body.author;
-  console.log(`${slug} ${title}, ${description} ${body} ${tagList} ${author}`);
+  let newArticle = new Article(slug, title, description, body, tagList, author);
+  let utility = new DataUtility();
+  utility.save(newArticle);
   res.location(`http://localhost:3000/articles/${slug}`);
-  res.send('http://localhost:3000/articles POST method');
+  res.sendStatus(201);
 });
 
 router.put('/:slug', (req, res) => {

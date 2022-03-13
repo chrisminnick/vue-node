@@ -26,13 +26,21 @@ var data = [
 ];
 
 // Define and implement the Article templare function
-function Article(slug, title, description, body, tagList, author) {}
+function Article(slug, title, description, body, tagList, author) {
+  this.slug = slug;
+  this.title = title;
+  this.description = description;
+  this.body = body;
+  this.tagList = tagList;
+  this.author = author;
+}
 
 // define the DataUtility template function
 function DataUtility() {
   this.findAll = function () {
     return data;
   };
+
   this.findOne = function (slug) {
     result = false;
     if (isSlugPresent(slug)) {
@@ -41,6 +49,13 @@ function DataUtility() {
     } else {
       throw error;
     }
+  };
+
+  this.save = function (newData) {
+    slug = '' + generateUniqueId() + '';
+    newData.slug = slug;
+    data.push(newData);
+    return data;
   };
 }
 
