@@ -1,11 +1,23 @@
 const express = require('express');
 const router = express.Router();
-let { generateUniqueId } = require('../../model/Article');
+let { generateUniqueId, data, DataUtility } = require('../../model/Article');
 
-router.get('/:slug', (req, res) => {
+router.get('/', (req, res) => {
+  let utility = new DataUtility();
+  let result = [];
+  result = utility.findAll();
+  res.json({ articles: result });
+});
+
+router.get('/:slug', (req, res, next) => {
   let slug = req.params.slug;
-  console.log(slug);
-  res.send('http://localhost:3000/articles GET method');
+  let utility = new DataUtility();
+  try {
+    let foundArticle = utility.findOne(slug);
+    res.json(foundArticle);
+  } catch (error) {
+    res.status(404).json({ error: 'File not found' });
+  }
 });
 
 router.post('/', (req, res) => {
