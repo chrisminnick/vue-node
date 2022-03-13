@@ -41,10 +41,14 @@ router.post('/', (req, res) => {
 
 router.put('/:slug', (req, res) => {
   let slug = req.params.slug;
-  console.log(`slug : ${slug}`);
-  let author = req.body;
-  console.log(`author : ${author}`);
-  res.send('http://localhost:3000/articles PUT method');
+  let utility = new DataUtility();
+  let userData = req.body;
+  try {
+    let result = utility.update(slug, userData);
+    res.status(200).json(result);
+  } catch {
+    res.status(404).json({ error: 'File not found' });
+  }
 });
 
 router.delete('/:slug', (req, res) => {

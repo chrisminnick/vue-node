@@ -67,6 +67,17 @@ function DataUtility() {
       throw error;
     }
   };
+
+  this.update = function (slug, userData) {
+    if (isSlugPresent(slug)) {
+      let foundArticle = findArticleBySlug(data, slug);
+      let updatedArticle = Object.assign(foundArticle, userData);
+      findAndReplace(data, slug, updatedArticle);
+      return updatedArticle;
+    } else {
+      throw error;
+    }
+  };
 }
 
 // Given Helper Functions
