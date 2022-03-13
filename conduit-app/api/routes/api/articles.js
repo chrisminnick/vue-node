@@ -7,14 +7,14 @@ let {
   Article,
 } = require('../../model/Article');
 
-router.get('/', (req, res) => {
+router.get('/articles', (req, res) => {
   let utility = new DataUtility();
   let result = [];
   result = utility.findAll();
   res.json({ articles: result });
 });
 
-router.get('/:slug', (req, res, next) => {
+router.get('/articles/:slug', (req, res, next) => {
   let slug = req.params.slug;
   let utility = new DataUtility();
   try {
@@ -25,7 +25,7 @@ router.get('/:slug', (req, res, next) => {
   }
 });
 
-router.post('/', (req, res) => {
+router.post('/articles', (req, res) => {
   let slug = generateUniqueId();
   let title = req.body.title;
   let description = req.body.description;
@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
   res.sendStatus(201);
 });
 
-router.put('/:slug', (req, res) => {
+router.put('/articles/:slug', (req, res) => {
   let slug = req.params.slug;
   let utility = new DataUtility();
   let userData = req.body;
@@ -51,7 +51,7 @@ router.put('/:slug', (req, res) => {
   }
 });
 
-router.delete('/:slug', (req, res) => {
+router.delete('/articles/:slug', (req, res) => {
   let slug = req.params.slug;
   let utility = new DataUtility();
   try {
