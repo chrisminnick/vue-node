@@ -48,10 +48,12 @@ router.put('/:slug', (req, res) => {
 });
 
 router.delete('/:slug', (req, res) => {
-  let test = false;
-  if (test) {
-    res.send({ sucess: 'Record deleted.' });
-  } else {
+  let slug = req.params.slug;
+  let utility = new DataUtility();
+  try {
+    let result = utility.delete(slug);
+    res.status(204).json({ message: 'success' });
+  } catch (error) {
     res.status(404).json({ error: 'File not found' });
   }
 });

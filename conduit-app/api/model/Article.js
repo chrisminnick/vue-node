@@ -57,6 +57,16 @@ function DataUtility() {
     data.push(newData);
     return data;
   };
+
+  this.delete = function (slug) {
+    let result = null;
+    if (isSlugPresent(slug)) {
+      data = findAndRemove(data, slug);
+      return data;
+    } else {
+      throw error;
+    }
+  };
 }
 
 // Given Helper Functions
