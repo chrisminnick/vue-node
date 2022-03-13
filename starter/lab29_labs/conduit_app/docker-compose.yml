@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: mongo:5.0.2
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $MONGODB_LOCAL_PORT:$MONGODB_DOCKER_PORT
+    volumes:
+      - db:/data/db
+  app:
+    depends_on:
+      - mongodb
+    build: ./api
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+    environment:
+      - DB_HOST=mongodb
+      - DB_NAME=$MONGODB_DATABASE
+      - DB_PORT=$MONGODB_DOCKER_PORT
+    stdin_open: true
+    tty: true
+  ui:
+    depends_on:
+      - app
+    build: ./ui
+    env_file: ./.env
+    ports:
+      - $VUE_LOCAL_PORT:$VUE_DOCKER_PORT
+    volumes:
+      - ./ui:/app
+ #    - /app/node_modules
+    environment: 
+      - CHOKIDAR_USEPOLLING=true
+volumes:
+  db:
