@@ -1,0 +1,84 @@
+https://www.youtube.com/watch?v=J_kU7O8OCOA
+
+1) Create a Node.js Application  
+2) Create a Dockerfile
+3) Build your Image
+
+    To create an image
+                        [docker hub]
+    docker build -t edelapaz15/nodeapp .
+
+    Test the image locally
+    docker images  {list all the available images}
+
+    docker run -d -p 3000:3000 edelapaz15/nodeapp   {run the image}
+
+    Launch in the browser
+
+    use ipconfig to determine ip address of the machine
+    Note: I use Default Switch IPW4 address
+    http://ip_address:3000
+    
+    docker rm -f [ID NUMBER]   {remove from the container, 
+                                    objective run in k8}
+
+
+4) Push image to the Docker Hub
+
+    Login in docker
+        docker Login
+        prompt you username/password
+
+                [docker account]/[match the tag created]:tag
+    docker push edelapaz15/nodeapp:latest
+    
+    go the docker hub ui and see the image
+
+
+
+(5) Create the deploy.yml
+
+(6) Create the service.yml
+
+
+
+(7) Deploy in kubernetes
+
+    start kubernetes
+        docker > settings
+        select kubernetes > enbale kubernetes > apply and restart
+    
+        kubectl get nodes  {test if k8 is up and running}
+
+        PS C:\kubernetes\api> kubectl create ns nodeapp
+        namespace/nodeapp created
+        
+        PS C:\kubernetes\api> kubectl apply -n nodeapp -f ./deployment/deploy.yml    
+        deployment.apps/nodeapp-deployment created
+
+        PS C:\kubernetes\api> kubectl get ns
+        NAME              STATUS   AGE
+        default           Active   26h
+        exampl-app        Active   11m
+        kube-node-lease   Active   26h
+        kube-public       Active   26h
+        kube-system       Active   26h
+        nodeapp           Active   91s
+
+        PS C:\kubernetes\api> kubectl -n nodeapp get deploy
+        NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+        nodeapp-deployment   1/1     1            1           2m52s
+        NAME                                  READY   STATUS    RESTARTS   AGE
+        nodeapp-deployment-7679f8dc4f-4f5sq   1/1     Running   0          3m19s
+
+        PS C:\kubernetes\api> kubectl -n nodeapp logs nodeapp-deployment-7679f8dc4f-4f5sq
+        listening on 3000
+
+        PS C:\kubernetes\api> kubectl apply -n nodeapp -f ./deployment/service.yml
+        service/nodeapp-service created
+
+        PS C:\kubernetes\api> kubectl -n nodeapp get svc
+        NAME              TYPE           CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
+        nodeapp-service   LoadBalancer   10.108.244.139   localhost     80:30464/TCP   2m2s
+    
+        http://localhost:80
