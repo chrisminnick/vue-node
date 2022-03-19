@@ -7,12 +7,13 @@ metadata:
 spec: 
   selector:
     app: nodeapp
-  type: LoadBalancer
-  externalIPs: 
-  - 172.23.128.1
+  type: ClusterIP
+  #externalIPs:
+  #- 172.16.0.53
   ports:
   - protocol: TCP
     name: http
-    targetPort: 3000
     port: 80
+    targetPort: 3000
+    
   

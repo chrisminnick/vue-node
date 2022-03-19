@@ -1,8 +1,13 @@
 const express = require("express");
 const app = express();
 
-app.listen(3000, function () {
+const PORT = 3000
+const HOST = '0.0.0.0';
+
+// app.listen(3000, function () {
+app.listen(PORT, HOST, function () {
     console.log("listening on 3000");
+    console.log(`Running on http://${HOST}:${PORT}`)
 });
 
 app.get("/", (req, res) => {
