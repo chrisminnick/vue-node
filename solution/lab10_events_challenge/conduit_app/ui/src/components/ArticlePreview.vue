@@ -18,7 +18,7 @@
       v-text="article.description"
       :style="{ fontSize: descriptionFontSize + 'em' }"
     />
-    <span><a :href="articleLink.slug">Read more...</a></span>
+    <div><a :href="articleLink.slug">Read more...</a></div>
   </div>
 </template>
 <script>

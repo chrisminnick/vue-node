@@ -12,13 +12,10 @@
       <i class="ion-heart"></i>
       <span class="counter"> {{ favoritesCount }} </span>
     </button>
+    <p v-text="article.description" />
+    <div><a :href="articleLink.slug">Read more...</a></div>
     <button v-on:click="$emit('enlarge-text', 0.1)">Enlarge Text</button>
     <button v-on:click="$emit('shrink-text', 0.1)">Shrink Text</button>
-    <p
-      v-text="article.description"
-      :style="{ fontSize: descriptionFontSize + 'em' }"
-    />
-    <div><a :href="articleLink.slug">Read more...</a></div>
   </div>
 </template>
 
@@ -44,7 +41,6 @@ export default defineComponent({
     return {
       favorited: false,
       favoritesCount: 0,
-      descriptionFontSize: 1,
     };
   },
   methods: {
