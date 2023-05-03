@@ -14,7 +14,7 @@
               <li class="nav-item">Global Feed</li>
             </ul>
           </div>
-          <GlobalFeed />
+          <h1 class="logo-font">Home Content</h1>
         </div>
         <div class="col-md-3">
           <div class="sidebar">
@@ -31,6 +31,4 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
-import GlobalFeed from './GlobalFeed.vue';
-</script>
+<script setup lang="ts"></script>
