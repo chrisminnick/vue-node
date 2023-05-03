@@ -14,19 +14,19 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import ArticlePreview from './ArticlePreview.vue';
-import articles from '../json/articles.json';
+import articlesData from '../json/articles.json';
 import type { Article } from './types';
+
+const articles = articlesData as Article[];
 
 export default defineComponent({
   name: 'ArticleList',
   components: {
     ArticlePreview,
   },
-  data(): {
-    articles: Article[];
-  } {
+  data() {
     return {
-      articles: articles,
+      articles,
     };
   },
 });
