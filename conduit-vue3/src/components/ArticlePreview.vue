@@ -3,7 +3,7 @@
     <h1 v-text="article.title" />
     <button
       class="btn btn-sm float-right"
-      v-on:click="toggleFavorite($event)"
+      v-on:click="toggleFavorite()"
       :class="{
         'btn-primary': favorited,
         'btn-outline-primary': !favorited,
@@ -13,20 +13,20 @@
       <span class="counter"> {{ favoritesCount }} </span>
     </button>
     <p v-text="article.description" />
-    <span><a :href="articleLink.slug">Read more...</a></span>
+    <div><a :href="articleLink.slug">Read more...</a></div>
+    <button v-on:click="$emit('enlarge-text', 0.1)">Enlarge Text</button>
+    <button v-on:click="$emit('shrink-text', 0.1)">Shrink Text</button>
   </div>
 </template>
 
 <script lang="ts">
-import type { Article } from './types';
 import { defineComponent } from 'vue';
-import type { PropType } from 'vue';
 
 export default defineComponent({
   name: 'ArticlePreview',
   props: {
     article: {
-      type: Object as PropType<Article>,
+      type: Object,
       required: true,
     },
   },
@@ -44,7 +44,7 @@ export default defineComponent({
     };
   },
   methods: {
-    toggleFavorite(event: Event) {
+    toggleFavorite() {
       this.favorited = !this.favorited;
       this.favoritesCount++;
       console.log('favorited = ' + this.favorited);

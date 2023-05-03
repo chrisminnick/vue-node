@@ -7,6 +7,9 @@
       v-for="(article, index) in articles"
       :article="article"
       :key="article.title + index"
+      :style="{ fontSize: articleFontSize + 'em' }"
+      v-on:enlarge-text="articleFontSize += 0.1"
+      v-on:shrink-text="articleFontSize -= 0.1"
     />
   </div>
 </template>
@@ -27,6 +30,7 @@ export default defineComponent({
   data() {
     return {
       articles,
+      articleFontSize: 1,
     };
   },
 });
