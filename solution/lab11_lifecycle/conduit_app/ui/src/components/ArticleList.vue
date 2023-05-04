@@ -13,36 +13,36 @@
 </template>
 
 <script>
-import ArticlePreview from './ArticlePreview.vue'
+import ArticlePreview from './ArticlePreview.vue';
 // import articles from '../json/articles.json';
-import ApiService from "../common/api.service.js"
 
 export default {
-    name: "ArticleList",
-    components: {
-        ArticlePreview
-    },
-    data() {
-        return {
-            // articles: articles,
-            articles: {},
-            articleFontSize: 1
-        }
-    },
-    async mounted() {
-          let results = await this.fetchArticles();
-          this.articles = results.data.articles;
-          console.log(this.articles);
-    },      
-    methods: {
+  name: 'ArticleList',
+  components: {
+    ArticlePreview,
+  },
+  data() {
+    return {
+      // articles: articles,
+      articles: {},
+      articleFontSize: 1,
+    };
+  },
+  async mounted() {
+    let results = await this.fetchArticles();
+    this.articles = results.data.articles;
+    console.log(this.articles);
+  },
+  methods: {
     fetchArticles() {
-      console.log("fetching articles");
-      return ApiService.query("articles").catch(error => {
-        throw new Error(`[RWV] ApiService ${error}`);
-      });
-    }
-  }
-}
+      console.log('fetching articles');
+      return this.axios
+        .get('https://conduit.productionready.io/api/articles')
+        .catch((error) => {
+          throw new Error(`[RWV] ApiService ${error}`);
+        });
+    },
+  },
+};
 </script>
-<style>
-</style>
+<style></style>
