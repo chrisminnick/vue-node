@@ -39,6 +39,9 @@ export default defineComponent({
       required: true,
     },
   },
+  components: {
+    TagItem,
+  },
   computed: {
     articleLink(): { slug: string } {
       return {

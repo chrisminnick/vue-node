@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="articles.length === 0" class="article-preview">
+    <div v-if="filteredArticles.value.length === 0" class="article-preview">
       No articles are here... yet.
     </div>
     <input
@@ -10,56 +10,43 @@
     />
 
     <ArticlePreview
-      v-for="(article, index) in filterIt"
+      v-for="(article, index) in filteredArticles.value"
       :article="article"
       :key="article.title + index"
       :style="{ fontSize: articleFontSize + 'em' }"
-      v-on:enlarge-text="articleFontSize += 0.1"
-      v-on:shrink-text="articleFontSize -= 0.1"
+      @enlarge-text="articleFontSize += 0.1"
+      @shrink-text="articleFontSize -= 0.1"
     />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import ArticlePreview from './ArticlePreview.vue';
-import type { Article } from './types';
+import { useArticles } from '../common/useArticles';
+import useFilterArticles from '../common/useFilterArticles';
 
 export default defineComponent({
   name: 'ArticleList',
   components: {
     ArticlePreview,
   },
-  data() {
-    return {
-      articles: [] as Article[],
-      articleFontSize: 1,
-      searchDetails: '',
-    };
-  },
-  computed: {
-    filterIt() {
-      const searchDetails = this.searchDetails.toLowerCase();
-      return this.articles.filter(({ title, description, body }) =>
-        [title, description, body].some((text) =>
-          text.toLowerCase().includes(searchDetails)
-        )
-      );
-    },
-  },
+  setup() {
+    const { state, fetchArticles } = useArticles();
+    const searchDetails = ref('');
 
-  methods: {
-    fetchArticles() {
-      console.log('fetching articles');
-      return this.axios.get('articles').catch((error) => {
-        throw new Error(`[RWV] ApiService ${error}`);
-      });
-    },
-  },
-  async mounted() {
-    let results = await this.fetchArticles();
-    this.articles = results.data.articles;
-    console.log(this.articles);
+    const filteredArticles = computed(() =>
+      useFilterArticles(state.articles, searchDetails.value)
+    );
+
+    fetchArticles();
+
+    return {
+      state,
+      searchDetails,
+      filteredArticles,
+      articleFontSize: 1,
+    };
   },
 });
 </script>
