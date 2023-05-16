@@ -9,6 +9,9 @@ import router from './router';
 import './assets/main.css';
 axios.defaults.baseURL = API_URL;
 
+import { fakeBackend } from './helpers/fake-backend';
+fakeBackend();
+
 const app = createApp(App);
 const pinia = createPinia();
 app.use(router);
