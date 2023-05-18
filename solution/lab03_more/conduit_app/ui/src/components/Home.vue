@@ -10,11 +10,10 @@
       <div class="row">
         <div class="col-md-9">
           <div class="feed-toggle">
-            <ul class="nav nav-pills outline-active">              
+            <ul class="nav nav-pills outline-active">
               <li class="nav-item">Global Feed</li>
             </ul>
           </div>
-          <!-- <p>Home Content Placeholder</p> -->
           <h1 class="logo-font">Home Content</h1>
         </div>
         <div class="col-md-3">
@@ -34,6 +33,6 @@
 </template>
 <script>
 export default {
-  name: "Home",
+  name: 'Home',
 };
 </script>

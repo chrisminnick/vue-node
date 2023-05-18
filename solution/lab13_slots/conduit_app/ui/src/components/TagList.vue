@@ -2,23 +2,23 @@
   <div class="tag-list">
     <div v-if="tags.length === 0">No Tags are here... yet.</div>
     <ul class="tag-list">
-      <Tag
-        v-for="(tag, index) in tags"
-        :tag="tag"
-        :key="`${tag.name}-${index}-01`"
-      />
+      <li v-for="tag in tags" class="tag-default tag-pill tag-outline">
+        <TagItem>
+          {{ tag }}
+        </TagItem>
+      </li>
     </ul>
   </div>
 </template>
 
-<script>
-import Tag from './Tag.vue';
-import ApiService from '../common/api.service';
+<script lang="ts">
+import { defineComponent } from 'vue';
+import TagItem from './TagItem.vue';
 
-export default {
+export default defineComponent({
   name: 'TagList',
   components: {
-    Tag,
+    TagItem,
   },
   data() {
     return {
@@ -34,10 +34,10 @@ export default {
   methods: {
     fetchTags() {
       console.log('fetching tags');
-      return ApiService.query('tags').catch((error) => {
+      return this.axios.get('tags').catch((error) => {
         throw new Error(`[RWV] ApiService ${error}`);
       });
     },
   },
-};
+});
 </script>

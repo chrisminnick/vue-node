@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
+</script>
+
 <template>
   <div id="app">
     <Header />
@@ -6,18 +11,4 @@
   </div>
 </template>
 
-<script>
-import Header from './components/Header'
-import Footer from './components/Footer'
-
-export default {
-  name: 'App',
-  components: {
-    Footer,
-    Header  
-  }
-}
-</script>
-
-<style>
-</style>
+<style scoped></style>

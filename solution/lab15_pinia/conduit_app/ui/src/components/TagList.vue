@@ -1,48 +1,43 @@
 <template>
-
   <div class="tag-list">
-    <div v-if="tags.length === 0">
-        No Tags are here... yet.
-    </div>
+    <div v-if="tags.length === 0">No Tags are here... yet.</div>
     <ul class="tag-list">
-    <Tag
-        v-for="(tag, index) in tags"
-        :tag="tag"
-        :key="`${tag.name}-${index}-01`"
-      />
+      <li v-for="tag in tags" class="tag-default tag-pill tag-outline">
+        <TagItem>
+          {{ tag }}
+        </TagItem>
+      </li>
     </ul>
   </div>
 </template>
 
-<script>
-import Tag from './Tag.vue';
-import ApiService from "../common/api.service";
+<script lang="ts">
+import { defineComponent } from 'vue';
+import TagItem from './TagItem.vue';
 
-export default {
-    name: 'TagList',
-    components: {
-    Tag
+export default defineComponent({
+  name: 'TagList',
+  components: {
+    TagItem,
   },
-  data(){
-        return{
-            tags: []
-        }
+  data() {
+    return {
+      tags: [],
+    };
   },
   async mounted() {
     let results = await this.fetchTags();
     this.tags = results.data.tags;
     console.log(this.tags);
   },
-  computed: {
-    
-  },
+  computed: {},
   methods: {
     fetchTags() {
-      console.log("fetching tags");
-      return ApiService.query("tags").catch(error => {
+      console.log('fetching tags');
+      return this.axios.get('tags').catch((error) => {
         throw new Error(`[RWV] ApiService ${error}`);
       });
-    }
-  }
-}
+    },
+  },
+});
 </script>

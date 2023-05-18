@@ -6,16 +6,12 @@
     </div>
   </footer>
 </template>
-<script>
-export default {
-  name: "Footer",
-};
-</script>
+<script setup lang="ts"></script>
 <style scoped>
 footer {
   background: #f3f3f3;
   margin-top: 3rem;
-  padding:1rem 0;
+  padding: 1rem 0;
   position: absolute;
   bottom: 0;
   width: 100%;

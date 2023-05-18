@@ -3,50 +3,52 @@
     <h1 v-text="article.title" />
     <button
       class="btn btn-sm float-right"
-      v-on:click="toggleFavorite"
+      v-on:click="toggleFavorite()"
       :class="{
         'btn-primary': favorited,
         'btn-outline-primary': !favorited,
       }"
     >
       <i class="ion-heart"></i>
-      <span class="counter"> {{ this.favoritesCount }} </span>
-    </button>
-    <button style="margin: 3px" v-on:click="$emit('enlarge-text', 0.1)">
-      Enlarge Text
-    </button>
-    <button style="margin: 3px" v-on:click="$emit('shrink-text', 0.1)">
-      Shrink Text
+      <span class="counter"> {{ favoritesCount }} </span>
     </button>
     <p v-text="article.description" />
-    <span><a :href="articleLink.slug">Read more...</a></span>
+    <div><a :href="articleLink.slug">Read more...</a></div>
+    <button v-on:click="$emit('enlarge-text', 0.1)">Enlarge Text</button>
+    <button v-on:click="$emit('shrink-text', 0.1)">Shrink Text</button>
   </div>
 </template>
-<script>
-export default {
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+
+export default defineComponent({
   name: 'ArticlePreview',
   props: {
-    article: { type: Object, required: true },
+    article: {
+      type: Object,
+      required: true,
+    },
   },
   computed: {
-    articleLink() {
+    articleLink(): { slug: string } {
       return {
         slug: this.article.slug,
       };
     },
   },
-  data: function () {
+  data() {
     return {
       favorited: false,
       favoritesCount: 0,
     };
   },
   methods: {
-    toggleFavorite: function () {
+    toggleFavorite() {
       this.favorited = !this.favorited;
       this.favoritesCount++;
       console.log('favorited = ' + this.favorited);
     },
   },
-};
+});
 </script>

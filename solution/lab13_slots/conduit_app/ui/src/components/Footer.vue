@@ -6,12 +6,7 @@
     </div>
   </footer>
 </template>
-
-<script>
-export default {
-  name: 'Footer',
-};
-</script>
+<script setup lang="ts"></script>
 <style scoped>
 footer {
   background: #f3f3f3;

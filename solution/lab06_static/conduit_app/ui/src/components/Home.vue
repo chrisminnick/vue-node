@@ -10,7 +10,7 @@
       <div class="row">
         <div class="col-md-9">
           <div class="feed-toggle">
-            <ul class="nav nav-pills outline-active">              
+            <ul class="nav nav-pills outline-active">
               <li class="nav-item">Global Feed</li>
             </ul>
           </div>
@@ -31,13 +31,6 @@
     </div>
   </div>
 </template>
-<script>
-
-import GlobalFeed from "./GlobalFeed.vue"
-export default {
-  name: "Home",
-  components: {
-    GlobalFeed
-  }
-};
+<script setup lang="ts">
+import GlobalFeed from './GlobalFeed.vue';
 </script>

@@ -1,12 +1,6 @@
 <template>
-    <div class="home-global"><ArticleList type="all" /></div>
+  <div class="home-global"><ArticleList type="all" /></div>
 </template>
-<script>
-import ArticleList from './ArticleList.vue'
-export default {
-    name: "GlobalFeed",
-    components: {
-        ArticleList
-    }
-}
+<script setup lang="ts">
+import ArticleList from './ArticleList.vue';
 </script>
