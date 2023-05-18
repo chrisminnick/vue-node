@@ -1,0 +1,13 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.node.json",
+  "include": [
+    "../conduit_app/ui/vite.config.*",
+    "../conduit_app/ui/vitest.config.*",
+    "../conduit_app/ui/cypress.config.*",
+    "../conduit_app/ui/playwright.config.*"
+  ],
+  "compilerOptions": {
+    "composite": true,
+    "types": ["node"]
+  }
+}
