@@ -22,7 +22,6 @@
 
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue';
-
 import ArticlePreview from './ArticlePreview.vue';
 import { useArticlesStore } from '../stores/articles';
 
